@@ -1,9 +1,14 @@
+# author: farah alyasari
+
+# packages
+import random
+
 # 3 by 3 board
 board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 min = 1
 max = 9
-player_symbol = 'O'
-computer_symbol = 'x'
+player_symbol = "O"
+computer_symbol = "X"
 #
 # the function accepts one parameter containing the board's current status
 # and prints it out to the console
@@ -14,17 +19,26 @@ def DisplayBoard(board):
 
 #
 # the function accepts the board current status, asks the user about their move,
-# checks the input and updates the board according to the user's decision
+# checks the input and updates the board according to the user's decision,
+# the number must be valid and cannot point to a field that's already occupied
 #
 def EnterMove(board):
-    move = int(input("Pick a move: "))
-    if move < min or move > max:
-        print("Illegal move")
-        return
+    move = 0
+    while True:
+        try:
+            move = int(input("Pick a move: "))
+            if move > max or move < min:
+                print("Illegal move")
+            else:
+                break
+        except ValueError:
+            print("Illegal value")
+        except:
+            print("unknown error")
     for row in board:
         if move in row:
-            position = row.index(move)
-            row[position] = player_symbol
+            move_position = row.index(move)
+            row[move_position] = player_symbol
 
 #
 # the function browses the board and builds a list of all the free squares;
@@ -32,14 +46,30 @@ def EnterMove(board):
 #
 def MakeListOfFreeFields(board):
     list = []
-    for row in range(len(board)):
-        for col in range(len(row)):
-            if item is not player_symbol or computer_symbol:
-                list.append((row,col))
-    print(list)
+    counter = 0
+    for row in board:
+        for col in row:
+            if col != player_symbol and col != computer_symbol:
+                row_position = board.index(row)
+                col_position = row.index(col)
+                list.append((row_position,col_position))
     return list
+
+#
+# the function draws the computer's move and updates the board
+# this function has an opportunity to incorporate artifical intelligence, but now it randomly generates a move based on the available position
+#
+def DrawMove(board):
+    sequence = MakeListOfFreeFields(board)
+    move = random.choice(sequence)
+    row = move[0]
+    col = move[1]
+    board[row][col] = computer_symbol
 
 DisplayBoard(board)
 EnterMove(board)
 MakeListOfFreeFields(board)
 DisplayBoard(board)
+#EnterMove(board)
+#DisplayBoard(board)
+DrawMove(board)
