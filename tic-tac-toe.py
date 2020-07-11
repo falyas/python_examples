@@ -15,7 +15,10 @@ computer_symbol = "X"
 #
 def DisplayBoard(board):
     for row in board:
-        print(row)
+        # The * unpacks row
+        print("+---+---+")
+        print(*row, sep=" | ")
+    print("+---+---+")
 
 #
 # the function accepts the board current status, asks the user about their move,
@@ -60,6 +63,7 @@ def MakeListOfFreeFields(board):
 # the player using 'O's or 'X's has won the game
 #
 def VictoryFor(board, sign):
+    pass
 
 #
 # the function draws the computer's move and updates the board
@@ -77,11 +81,20 @@ def DrawMove(board):
     except:
         print("unkown error")
 
+#
+# Program entry
+#
 def TicTacToe(board):
+    #this is an infinite loop
     while True:
         DrawMove(board)
         DisplayBoard(board)
         EnterMove(board)
         DisplayBoard(board)
 
-TicTacToe(board)
+#TicTacToe(board)
+DisplayBoard(board)
+DrawMove(board)
+DisplayBoard(board)
+EnterMove(board)
+DisplayBoard(board)
