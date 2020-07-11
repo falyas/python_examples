@@ -56,20 +56,32 @@ def MakeListOfFreeFields(board):
     return list
 
 #
+# the function analyzes the board status in order to check if
+# the player using 'O's or 'X's has won the game
+#
+def VictoryFor(board, sign):
+
+#
 # the function draws the computer's move and updates the board
 # this function has an opportunity to incorporate artifical intelligence, but now it randomly generates a move based on the available position
 #
 def DrawMove(board):
-    sequence = MakeListOfFreeFields(board)
-    move = random.choice(sequence)
-    row = move[0]
-    col = move[1]
-    board[row][col] = computer_symbol
+    try:
+        sequence = MakeListOfFreeFields(board)
+        move = random.choice(sequence)
+        row = move[0]
+        col = move[1]
+        board[row][col] = computer_symbol
+    except IndexError:
+        print("The game should have ended")
+    except:
+        print("unkown error")
 
-DisplayBoard(board)
-EnterMove(board)
-MakeListOfFreeFields(board)
-DisplayBoard(board)
-#EnterMove(board)
-#DisplayBoard(board)
-DrawMove(board)
+def TicTacToe(board):
+    while True:
+        DrawMove(board)
+        DisplayBoard(board)
+        EnterMove(board)
+        DisplayBoard(board)
+
+TicTacToe(board)
