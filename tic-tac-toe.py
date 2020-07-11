@@ -16,9 +16,10 @@ computer_symbol = "X"
 def DisplayBoard(board):
     for row in board:
         # The * unpacks row
-        print("+---+---+")
-        print(*row, sep=" | ")
-    print("+---+---+")
+        print("+---+---+---+")
+        print("| ", end="")
+        print(*row, sep=" | ", end=" |\n")
+    print("+---+---+---+")
 
 #
 # the function accepts the board current status, asks the user about their move,
